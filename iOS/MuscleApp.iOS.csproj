@@ -152,6 +152,7 @@
     <Compile Include="ViewControllers\BrowseViewController.designer.cs">
       <DependentUpon>BrowseViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewControllers\ExcerciseAddViewController.cs" />
     <Compile Include="ViewControllers\ItemEditViewController.cs" />
     <Compile Include="ViewControllers\ItemNewViewController.cs" />
     <Compile Include="ViewControllers\ItemNewViewController.designer.cs">
