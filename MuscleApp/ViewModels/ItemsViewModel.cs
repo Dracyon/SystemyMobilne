@@ -10,6 +10,7 @@ namespace MuscleApp
         public ObservableCollection<Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
         public Command AddItemCommand { get; set; }
+        public Command EditItemCommand { get; set; }
 
         public ItemsViewModel()
         {
@@ -17,6 +18,7 @@ namespace MuscleApp
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             AddItemCommand = new Command<Item>(async (Item item) => await AddItem(item));
+            EditItemCommand = new Command<Item>(async (Item item) => await EditItem(item));
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -49,6 +51,13 @@ namespace MuscleApp
         {
             Items.Add(item);
             await DataStore.AddItemAsync(item);
+        }
+
+        async Task EditItem(Item item)
+        {
+            //update
+            //Items.Add(item);
+            await DataStore.UpdateItemAsync(item);
         }
     }
 }

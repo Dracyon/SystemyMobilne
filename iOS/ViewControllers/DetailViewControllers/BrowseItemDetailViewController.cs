@@ -6,6 +6,7 @@ namespace MuscleApp.iOS
     public partial class BrowseItemDetailViewController : UIViewController
     {
         public ItemDetailViewModel ViewModel { get; set; }
+        public ItemsViewModel ItemsViewModel { get; set; }
         public BrowseItemDetailViewController(IntPtr handle) : base(handle) { }
 
         public override void ViewDidLoad()
@@ -16,5 +17,6 @@ namespace MuscleApp.iOS
             ItemNameLabel.Text = ViewModel.Item.Text;
             ItemDescriptionLabel.Text = ViewModel.Item.Description;
         }
-    }
+
+	}
 }
