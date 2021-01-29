@@ -7,7 +7,7 @@ namespace MuscleApp
 {
     public class ItemsViewModel : BaseViewModel
     {
-        public ObservableCollection<Item> Items { get; set; }
+        public ObservableCollection<TrainingEntity> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
         public Command AddItemCommand { get; set; }
         public Command EditItemCommand { get; set; }
@@ -15,10 +15,10 @@ namespace MuscleApp
         public ItemsViewModel()
         {
             Title = "Browse";
-            Items = new ObservableCollection<Item>();
+            Items = new ObservableCollection<TrainingEntity>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            AddItemCommand = new Command<Item>(async (Item item) => await AddItem(item));
-            EditItemCommand = new Command<Item>(async (Item item) => await EditItem(item));
+            AddItemCommand = new Command<TrainingEntity>(async (TrainingEntity item) => await AddItem(item));
+            EditItemCommand = new Command<TrainingEntity>(async (TrainingEntity item) => await EditItem(item));
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -47,13 +47,13 @@ namespace MuscleApp
             }
         }
 
-        async Task AddItem(Item item)
+        async Task AddItem(TrainingEntity item)
         {
             Items.Add(item);
             await DataStore.AddItemAsync(item);
         }
 
-        async Task EditItem(Item item)
+        async Task EditItem(TrainingEntity item)
         {
             //update
             //Items.Add(item);

@@ -10,9 +10,9 @@ namespace MuscleApp
         public static void Initialize()
         {
             if (UseMockDataStore)
-                ServiceLocator.Instance.Register<IDataStore<Item>, MockDataStore>();
+                ServiceLocator.Instance.Register<IDataStore<TrainingEntity>, MockDataStore>();
             else
-                ServiceLocator.Instance.Register<IDataStore<Item>, CloudDataStore>();
+                ServiceLocator.Instance.Register<IDataStore<TrainingEntity>, CloudDataStore>();
         }
     }
 }

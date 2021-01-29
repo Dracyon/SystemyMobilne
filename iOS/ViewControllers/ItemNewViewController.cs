@@ -18,7 +18,7 @@ namespace MuscleApp.iOS
 
             btnSaveItem.TouchUpInside += (sender, e) =>
             {
-                var item = new Item
+                var item = new TrainingEntity
                 {
                     Text = txtTitle.Text,
                     Description = txtDesc.Text

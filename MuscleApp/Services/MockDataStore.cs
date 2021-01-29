@@ -5,39 +5,39 @@ using System.Threading.Tasks;
 
 namespace MuscleApp
 {
-    public class MockDataStore : IDataStore<Item>
+    public class MockDataStore : IDataStore<TrainingEntity>
     {
-        List<Item> items;
+        List<TrainingEntity> items;
 
         public MockDataStore()
         {
-            items = new List<Item>();
-            var _items = new List<Item>
+            items = new List<TrainingEntity>();
+            var _items = new List<TrainingEntity>
             {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is a nice description"},
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is a nice description"},
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is a nice description"},
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is a nice description"},
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is a nice description"},
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is a nice description"},
+                new TrainingEntity { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is a nice description"},
+                new TrainingEntity { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is a nice description"},
+                new TrainingEntity { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is a nice description"},
+                new TrainingEntity { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is a nice description"},
+                new TrainingEntity { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is a nice description"},
+                new TrainingEntity { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is a nice description"},
             };
 
-            foreach (Item item in _items)
+            foreach (TrainingEntity item in _items)
             {
                 items.Add(item);
             }
         }
 
-        public async Task<bool> AddItemAsync(Item item)
+        public async Task<bool> AddItemAsync(TrainingEntity item)
         {
             items.Add(item);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Item item)
+        public async Task<bool> UpdateItemAsync(TrainingEntity item)
         {
-            var _item = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
+            var _item = items.Where((TrainingEntity arg) => arg.Id == item.Id).FirstOrDefault();
             items.Remove(_item);
             items.Add(item);
 
@@ -46,18 +46,18 @@ namespace MuscleApp
 
         public async Task<bool> DeleteItemAsync(string id)
         {
-            var _item = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
+            var _item = items.Where((TrainingEntity arg) => arg.Id == id).FirstOrDefault();
             items.Remove(_item);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<TrainingEntity> GetItemAsync(string id)
         {
             return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<TrainingEntity>> GetItemsAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(items);
         }

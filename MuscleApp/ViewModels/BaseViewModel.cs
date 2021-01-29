@@ -7,7 +7,7 @@ namespace MuscleApp
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => ServiceLocator.Instance.Get<IDataStore<Item>>() ?? new MockDataStore();
+        public IDataStore<TrainingEntity> DataStore => ServiceLocator.Instance.Get<IDataStore<TrainingEntity>>() ?? new MockDataStore();
 
         bool isBusy = false;
         public bool IsBusy

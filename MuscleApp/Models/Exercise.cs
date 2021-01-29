@@ -8,5 +8,6 @@ namespace MuscleApp.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public List<Rep> Reps { get; set; }
+        public int NumOfReps { get; set; }
     }
 }

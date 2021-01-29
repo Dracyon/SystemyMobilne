@@ -5,7 +5,6 @@ namespace MuscleApp.Models
     {
         public int RepNumber { get; set; }
         public float Weight { get; set; }
-
     }
 
     
