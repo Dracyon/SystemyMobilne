@@ -20,6 +20,10 @@ namespace MuscleApp.iOS
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITableView ExcerciseTable { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel ItemDescriptionLabel { get; set; }
 
         [Outlet]
@@ -31,6 +35,11 @@ namespace MuscleApp.iOS
             if (EditBtn != null) {
                 EditBtn.Dispose ();
                 EditBtn = null;
+            }
+
+            if (ExcerciseTable != null) {
+                ExcerciseTable.Dispose ();
+                ExcerciseTable = null;
             }
 
             if (ItemDescriptionLabel != null) {

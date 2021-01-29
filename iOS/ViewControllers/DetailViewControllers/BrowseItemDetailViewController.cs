@@ -1,22 +1,27 @@
-﻿using System;
+﻿using MuscleApp.ViewModels;
+using System;
 using UIKit;
 
 namespace MuscleApp.iOS
 {
-    public partial class BrowseItemDetailViewController : UIViewController
-    {
-        public ItemDetailViewModel ViewModel { get; set; }
-        public ItemsViewModel ItemsViewModel { get; set; }
-        public BrowseItemDetailViewController(IntPtr handle) : base(handle) { }
+	public partial class BrowseItemDetailViewController : UIViewController
+	{
+		public ItemDetailViewModel ViewModel { get; set; }
+		public ItemsViewModel ItemsViewModel { get; set; }
+		public BrowseItemDetailViewController(IntPtr handle) : base(handle) { }
 
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
+		public override void ViewDidLoad()
+		{
+			base.ViewDidLoad();
 
-            Title = ViewModel.Title;
-            ItemNameLabel.Text = ViewModel.Item.Text;
-            ItemDescriptionLabel.Text = ViewModel.Item.Description;
-        }
+			Title = ViewModel.Title;
+			ItemNameLabel.Text = ViewModel.Item.Text;
+			ItemDescriptionLabel.Text = ViewModel.Item.Description;
+			ExcerciseTable = new UITableView(View.Bounds);
+			ExcerciseTable.Source = new TableSource(ViewModel.Item.Exercises);
+			Add(ExcerciseTable);
+		}
 
 	}
+
 }
