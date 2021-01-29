@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MuscleApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,18 +9,36 @@ namespace MuscleApp
     public class MockDataStore : IDataStore<TrainingEntity>
     {
         List<TrainingEntity> items;
+        List<Exercise> excercises;
 
         public MockDataStore()
         {
+            excercises = new List<Exercise>();
+
+            var _exercises = new List<Exercise>
+            {
+                new Exercise {Id = Guid.NewGuid().ToString(), Name = "Pull up", NumOfReps = 10, Weight = 60},
+                new Exercise {Id = Guid.NewGuid().ToString(), Name = "Push up", NumOfReps = 6, Weight = 13},
+                new Exercise {Id = Guid.NewGuid().ToString(), Name = "Sit up", NumOfReps = 12, Weight = 20},
+                new Exercise {Id = Guid.NewGuid().ToString(), Name = "Stand up", NumOfReps = 8, Weight = 60},
+                new Exercise {Id = Guid.NewGuid().ToString(), Name = "Lay up", NumOfReps = 8, Weight = 14},
+                new Exercise {Id = Guid.NewGuid().ToString(), Name = "Go up", NumOfReps = 7, Weight = 20}
+            };
+
+            foreach (Exercise exercise in _exercises)
+            {
+                excercises.Add(exercise);
+            }
+
             items = new List<TrainingEntity>();
             var _items = new List<TrainingEntity>
             {
-                new TrainingEntity { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is a nice description"},
-                new TrainingEntity { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is a nice description"},
-                new TrainingEntity { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is a nice description"},
-                new TrainingEntity { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is a nice description"},
-                new TrainingEntity { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is a nice description"},
-                new TrainingEntity { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is a nice description"},
+                new TrainingEntity { Id = Guid.NewGuid().ToString(), Text = "First Set", Description="This is a nice description", Exercises = excercises},
+                new TrainingEntity { Id = Guid.NewGuid().ToString(), Text = "Second Set", Description="This is a nice description", Exercises = excercises},
+                new TrainingEntity { Id = Guid.NewGuid().ToString(), Text = "Third Set", Description="This is a nice description", Exercises = excercises},
+                new TrainingEntity { Id = Guid.NewGuid().ToString(), Text = "Fourth Set", Description="This is a nice description", Exercises = excercises},
+                new TrainingEntity { Id = Guid.NewGuid().ToString(), Text = "Fifth Set", Description="This is a nice description", Exercises = excercises},
+                new TrainingEntity { Id = Guid.NewGuid().ToString(), Text = "Sixth Set", Description="This is a nice description", Exercises = excercises},
             };
 
             foreach (TrainingEntity item in _items)

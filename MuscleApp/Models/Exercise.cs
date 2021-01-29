@@ -5,9 +5,9 @@ namespace MuscleApp.Models
 {
     public class Exercise
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
-        public List<Rep> Reps { get; set; }
+        public float Weight { get; set; }
         public int NumOfReps { get; set; }
     }
 }

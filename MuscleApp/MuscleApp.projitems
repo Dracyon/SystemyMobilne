@@ -21,6 +21,5 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ItemsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Exercise.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Rep.cs" />
   </ItemGroup>
 </Project>
