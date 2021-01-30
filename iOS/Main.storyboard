@@ -357,7 +357,7 @@
         </scene>
         <scene sceneID="4377">
             <objects>
-                <viewController id="4378" sceneMemberID="viewController">
+                <viewController id="4378" sceneMemberID="viewController" customClass="ArchiveViewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4395"/>
                         <viewControllerLayoutGuide type="bottom" id="4396"/>
@@ -366,9 +366,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="19943" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                <rect key="frame" x="16" y="78" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="19944">
+                                        <rect key="frame" x="0.0" y="28" width="240" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="19944" id="19945">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                     </view>
                     <tabBarItem key="tabBarItem" title="Archive" id="4380" translatesAutoresizingMaskIntoConstraints="NO" image="calendar" catalog="system"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="ArchiveTable" destination="19943" id="name-outlet-19943"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4381" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -482,7 +502,7 @@
                                 <state key="normal" title="Add Exercise" catalog="system" image="plus"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="1" height="1"/>
                                 <connections>
-                                    <action selector="AddBtn_TouchUpInside:" destination="11502" id="15738" eventType="touchUpInside"/>
+                                    <segue id="19049" destination="6442" kind="show"/>
                                 </connections>
                                 <constraints>
                                     <constraint id="16358" firstAttribute="width" constant="239"/>

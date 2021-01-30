@@ -19,7 +19,7 @@ namespace MuscleApp.iOS
 
             AppNameLabel.Text = "MuscleApp";
             VersionLabel.Text = "1.0";
-            AboutTextView.Text = "This app is written in C# and native APIs using the Xamarin Platform. It shares code with its iOS, Android, & Windows versions.";
+            AboutTextView.Text = "This app is written to pass Mobile App Laboratory";
         }
 
         partial void ReadMoreButton_TouchUpInside(UIButton sender) => ViewModel.OpenWebCommand.Execute(null);

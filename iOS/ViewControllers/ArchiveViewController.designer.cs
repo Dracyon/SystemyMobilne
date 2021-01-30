@@ -10,11 +10,19 @@ using System.CodeDom.Compiler;
 
 namespace MuscleApp.iOS.ViewControllers
 {
-    [Register ("ExcerciseAddViewController")]
-    partial class ExcerciseAddViewController
+    [Register ("ArchiveViewController")]
+    partial class ArchiveViewController
     {
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITableView ArchiveTable { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
+            if (ArchiveTable != null) {
+                ArchiveTable.Dispose ();
+                ArchiveTable = null;
+            }
         }
     }
 }
