@@ -14,11 +14,24 @@ namespace MuscleApp.iOS
 		{
 			base.ViewDidLoad();
 
-			Title = ViewModel.Title;
-			ItemNameLabel.Text = ViewModel.Item.Text;
-			ItemDescriptionLabel.Text = ViewModel.Item.Description;
+			var head = new UIView(frame: new CoreGraphics.CGRect(0, 0, UIScreen.MainScreen.Bounds.Width, 50));
+			head.BackgroundColor = UIColor.Red;
+
+			UILabel label = new UILabel(head.Frame);
+			label.Text = ViewModel.Item.Description;
+			head.Add(label);
+
+			var foot = new UIView(frame: new CoreGraphics.CGRect(0, 0, UIScreen.MainScreen.Bounds.Width, 50));
+
+			EditBtn.Frame = foot.Frame;
+			foot.Add(EditBtn);
+
+
 			ExcerciseTable = new UITableView(View.Bounds);
 			ExcerciseTable.Source = new TableSource(ViewModel.Item.Exercises);
+			ExcerciseTable.TableHeaderView = head;
+			ExcerciseTable.TableFooterView = foot;
+
 			Add(ExcerciseTable);
 		}
 
