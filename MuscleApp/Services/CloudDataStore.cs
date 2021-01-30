@@ -80,5 +80,10 @@ namespace MuscleApp
 
             return response.IsSuccessStatusCode;
         }
-    }
+
+		public Task<bool> AddExerciseAsync(TrainingEntity item)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

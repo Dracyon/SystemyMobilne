@@ -140,6 +140,7 @@
     </ImageAsset>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewControllers\AddExerciseController.cs" />
     <Compile Include="ViewControllers\DetailViewControllers\BrowseItemDetailViewController.cs" />
     <Compile Include="ViewControllers\DetailViewControllers\BrowseItemDetailViewController.designer.cs">
       <DependentUpon>BrowseItemDetailViewController.cs</DependentUpon>

@@ -80,5 +80,10 @@ namespace MuscleApp
         {
             return await Task.FromResult(items);
         }
-    }
+
+		public Task<bool> AddExerciseAsync(TrainingEntity item)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

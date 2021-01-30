@@ -29,8 +29,11 @@ namespace MuscleApp.iOS
 
 			ExcerciseTable = new UITableView(View.Bounds);
 			ExcerciseTable.Source = new TableSource(ViewModel.Item.Exercises);
+
 			ExcerciseTable.TableHeaderView = head;
 			ExcerciseTable.TableFooterView = foot;
+
+
 
 			Add(ExcerciseTable);
 		}

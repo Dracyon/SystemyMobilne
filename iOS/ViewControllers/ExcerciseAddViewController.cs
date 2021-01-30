@@ -1,4 +1,6 @@
 ﻿using Foundation;
+using MuscleApp.Models;
+using MuscleApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -9,120 +11,64 @@ using UIKit;
 namespace MuscleApp.iOS.ViewControllers
 {
 	[Register("ExcerciseAddViewController")]
-	public class ExcerciseAddViewController : UITableViewController
-    {
-        UIRefreshControl refreshControl;
+	public class ExcerciseAddViewController : UIViewController
+	{
+		public ItemDetailViewModel ViewModel { get; set; }
 
-        public ItemsViewModel ViewModel { get; set; }
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
+		public ItemsViewModel ItemsViewModel { get; set; }
 
-            ViewModel = new ItemsViewModel();
+		public List<Exercise> Exercises;
 
-            // Setup UITableView.
-            refreshControl = new UIRefreshControl();
-            refreshControl.ValueChanged += RefreshControl_ValueChanged;
-            TableView.Add(refreshControl);
-            TableView.Source = new ItemsDataSource(ViewModel);
+		public ExcerciseAddViewController(IntPtr handle) : base(handle)
+		{
+			
+		}
 
-            Title = ViewModel.Title;
+		public override void ViewDidLoad()
+		{
+			base.ViewDidLoad();
 
-            ViewModel.PropertyChanged += IsBusy_PropertyChanged;
-            ViewModel.Items.CollectionChanged += Items_CollectionChanged;
-        }
+			Exercises = new List<Exercise>();
 
-        public override void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
+			
+			ExcerciseTable = new UITableView(View.Bounds);
+			ExcerciseTable.Source = new TableSource(Exercises);
 
-            if (ViewModel.Items.Count == 0)
-                ViewModel.LoadItemsCommand.Execute(null);
-        }
+			Exercises.Add(new Exercise
+			{Id = "0", Name = "Sample Exercise", NumOfReps =1, Weight = 1
+			});
 
-        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
-        {
-            if (segue.Identifier == "NavigateToItemDetailSegue")
-            {
-                var controller = segue.DestinationViewController as BrowseItemDetailViewController;
-                var indexPath = TableView.IndexPathForCell(sender as UITableViewCell);
-                var item = ViewModel.Items[indexPath.Row];
+			var foot = new UIView(frame: new CoreGraphics.CGRect(0, 0, UIScreen.MainScreen.Bounds.Width, 50));
 
-                controller.ViewModel = new ItemDetailViewModel(item);
-            }
-            else
-            {
-                var controller = segue.DestinationViewController as ItemNewViewController;
-                controller.ViewModel = ViewModel;
-            }
-        }
+			AddBtn.Frame = foot.Frame;
+			foot.Add(AddBtn);
 
-        void RefreshControl_ValueChanged(object sender, EventArgs e)
-        {
-            if (!ViewModel.IsBusy && refreshControl.Refreshing)
-                ViewModel.LoadItemsCommand.Execute(null);
-        }
+			ExcerciseTable.TableFooterView = foot;
 
-        void IsBusy_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            var propertyName = e.PropertyName;
-            switch (propertyName)
-            {
-                case nameof(ViewModel.IsBusy):
-                    {
-                        InvokeOnMainThread(() =>
-                        {
-                            if (ViewModel.IsBusy && !refreshControl.Refreshing)
-                                refreshControl.BeginRefreshing();
-                            else if (!ViewModel.IsBusy)
-                                refreshControl.EndRefreshing();
-                        });
-                    }
-                    break;
-            }
-        }
+			Add(ExcerciseTable);
 
-        void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            InvokeOnMainThread(() => TableView.ReloadData());
-        }
+//			ViewModel.Item.Exercises = Exercises;
+		}
+		[Outlet]
+		UITableView ExcerciseTable { get; set; }
 
-        [Outlet]
-         UIKit.UIButton btnSave { get; set; }
+		[Outlet]
+		UIButton AddBtn { get; set; }
 
-        void ReleaseDesignerOutlets()
-        {
-            if (btnSave != null)
-            {
-                btnSave.Dispose();
-                btnSave = null;
-            }
-        }
-    }
-    class ItemsDataSource : UITableViewSource
-    {
-        static readonly NSString CELL_IDENTIFIER = new NSString("ITEM_CELL");
+		public void ReleaseDesignerOutlets()
+		{
 
-        ItemsViewModel viewModel;
+			if (ExcerciseTable != null)
+			{
+				ExcerciseTable.Dispose();
+				ExcerciseTable = null;
+			}
+			if (AddBtn != null)
+			{
+				AddBtn.Dispose();
+				AddBtn = null;
+			}
+		}
 
-        public ItemsDataSource(ItemsViewModel viewModel)
-        {
-            this.viewModel = viewModel;
-        }
-
-        public override nint RowsInSection(UITableView tableview, nint section) => viewModel.Items.Count;
-        public override nint NumberOfSections(UITableView tableView) => 1;
-
-        public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
-        {
-            var cell = tableView.DequeueReusableCell(CELL_IDENTIFIER, indexPath);
-
-            var item = viewModel.Items[indexPath.Row];
-            cell.TextLabel.Text = item.Text;
-            cell.DetailTextLabel.Text = item.Description;
-            cell.LayoutMargins = UIEdgeInsets.Zero;
-
-            return cell;
-        }
-    }
+	}
 }

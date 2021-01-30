@@ -1,7 +1,9 @@
-﻿using System;
+﻿using MuscleApp.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace MuscleApp
 {
@@ -11,7 +13,7 @@ namespace MuscleApp
         public Command LoadItemsCommand { get; set; }
         public Command AddItemCommand { get; set; }
         public Command EditItemCommand { get; set; }
-
+        public Command AddExerciseCommand { get; set; }
         public ItemsViewModel()
         {
             Title = "Browse";
@@ -19,6 +21,7 @@ namespace MuscleApp
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             AddItemCommand = new Command<TrainingEntity>(async (TrainingEntity item) => await AddItem(item));
             EditItemCommand = new Command<TrainingEntity>(async (TrainingEntity item) => await EditItem(item));
+            AddExerciseCommand = new Command<TrainingEntity>(async (TrainingEntity item) => await AddExercise(item));
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -52,6 +55,11 @@ namespace MuscleApp
             Items.Add(item);
             await DataStore.AddItemAsync(item);
         }
+
+        async Task AddExercise(TrainingEntity item)
+		{
+            await DataStore.UpdateItemAsync(item);
+		}
 
         async Task EditItem(TrainingEntity item)
         {

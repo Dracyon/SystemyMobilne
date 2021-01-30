@@ -8,10 +8,10 @@ using UIKit;
 
 namespace MuscleApp.ViewModels
 {
-    public class TableSource : UITableViewSource
-    {
+	public class TableSource : UITableViewSource
+	{
 
-        string CellIdentifier = "TableCell";
+		string CellIdentifier = "TableCell";
 		private List<Exercise> exercises;
 
 		public TableSource(List<Exercise> exercises)
@@ -20,24 +20,31 @@ namespace MuscleApp.ViewModels
 		}
 
 		public override nint RowsInSection(UITableView tableview, nint section)
-        {
-            return exercises.Count;
-        }
+		{
+			if (exercises == null)
+			{
+				return 0;
+			}
+			else
+			{
+				return exercises.Count;
+			}
+		}
 
-        public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
-        {
-            UITableViewCell cell = tableView.DequeueReusableCell(CellIdentifier);
-            var item = exercises.ElementAt(indexPath.Row);
+		public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
+		{
+			UITableViewCell cell = tableView.DequeueReusableCell(CellIdentifier);
+			var item = exercises.ElementAt(indexPath.Row);
 
-            //if there are no cells to reuse, create a new one
-            if (cell == null)
-            {
-                cell = new UITableViewCell(UITableViewCellStyle.Default, CellIdentifier);
-            }
+			//if there are no cells to reuse, create a new one
+			if (cell == null)
+			{
+				cell = new UITableViewCell(UITableViewCellStyle.Default, CellIdentifier);
+			}
 
-            cell.TextLabel.Text = item.Name + " Reps: " + item.NumOfReps + " Weight " +item.Weight;
+			cell.TextLabel.Text = item.Name + " Reps: " + item.NumOfReps + " Weight " + item.Weight;
 
-            return cell;
-        }
-    }
+			return cell;
+		}
+	}
 }
